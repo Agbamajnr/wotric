@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <%- include('./partials/head.ejs') %>
+<body>
+
+    <nav class="navbar">
+        <span>Poemic</span>
+        <img src="./img/logo.jpg" alt="" class="logo">
+        <ul class="links-container">
+            <li class="link-item"><a href="/" class="link">Home</a></li>
+            <li class="link-item"><a href="/library" class="link">Library</a></li>
+            <li class="link-item"><a href="/books/create" class="link">Create</a></li>
+        </ul>
+    </nav>
+
+    <header class="header">
+        <div class="content">
+            <h1 class="heading">
+                <span class="small">Welcome to the world of</span>
+                <span class="no-fill">Sweet Words</span>
+            </h1>
+            <a href="/books/create" class="btn">Write a poem</a>
+        </div>
+    </header>
+
+    <section class="blogs-section">
+        <%  if(books.length > 0) { %>
+           <% books.forEach(book => { %>
+            <div class="blog-card">
+                <a href="/books/<%= book._id %>" class="single" style="text-decoration: none; color: black;">
+                    <img src="./img/10.jpg" class="blog-image" alt="">
+                    <h1 class="blog-title"><%= book.title %></h1>
+                    <p class="blog-author">Authored by <i><%= book.author %></i></p>
+                    <a href="/books/<%= book._id %>" class="btn dark">read</a>
+                    <a href="/books" data-doc="<%= book._id %>" class="delete" >Delete</a>
+                </a>
+            </div>
+            <% }) %>
+           <% } else { %>
+            <p>Oops.....There are no poems in the store</p>
+            <% } %>
+      </section>
+
+    <script>
+        const deleteBook = document.querySelector('.delete');
+
+        deleteBook.addEventListener('click', (e) => {
+            const endpoints = `/books/${deleteBook.dataset.doc}`;
+
+            fetch(endpoints, {
+                method: 'DELETE'
+            })
+                .then(response => console.log(response))
+                .then(data => console.log(data))
+                .catch((err) => console.log(err))
+        })
+    </script>
+
+    <%- include('./partials/script.ejs') %>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/headForm.ejs') %>
+</head>
+<body id="body">
+
+    
+    <script>
+        const form = prompt('Admin password please').toString();
+        const pwd = 'Kate1973';
+        const body = document.getElementById('body');
+
+        console.log(body, form, pwd)
+
+        if (form !== pwd) {
+            body.style.display = 'none';
+            alert('Failed to login as admin')
+        } else {
+            body.style.display = 'block';
+        }
+
+        
+    </script>
+</body>
+</html>

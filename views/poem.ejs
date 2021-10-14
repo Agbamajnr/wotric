@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+</head>
+<body>
+    
+    <div class="container">
+        <h3><%= book.title %></h3>
+        <p><%= book.author %></p>
+
+        <div class="main-body">
+            <p id="poem" data-doc="<%= book.body %>"></p>
+        </div>
+    </div>
+
+
+    <%- include('./partials/script.ejs') %>
+
+    <script>
+        const poem =  document.querySelector('#poem');
+        const endpoint = `${poem.dataset.doc}`;
+
+        poem.innerHTML = endpoint;
+
+    </script>
+</body>
+</html>
